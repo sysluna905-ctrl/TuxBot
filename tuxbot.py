@@ -1,22 +1,26 @@
 #!/usr/bin/env python3
 # TuxBot - Your Linux penguin buddy
-# Lesson 2: Smart Command Handling
+# Lesson 3: Response Dictionary + Random Replies
+
+import random
 
 print("🐧 Hello! I'm TuxBot, your friendly Linux penguin.")
 print("Type 'exit' or 'quit' anytime to stop chatting.\n")
 
+# TODO: Replace this with a proper responses dictionary
+responses = {
+    "hi": ["Hey there!", "Hello!", "Hiya!"],
+    "hello": ["Hey there!", "Hello!", "Hiya!"],
+    "help": ["I can say hi, tell you who I am, or answer basic questions!"],
+    "who are you": ["I'm TuxBot, your Linux penguin buddy! 🐧"],
+}
+
 while True:
-    user_input = input("You: ").strip()
+    user_input = input("You: ").strip().lower()
     
-    if user_input.lower() in ["exit", "quit"]:
+    if user_input in ["exit", "quit"]:
         print("🐧 Bye! Come back anytime. TuxBot out! 👋")
         break
     
-    if user_input.lower() in ["hello", "hi", "hey"]:
-        print("🐧 TuxBot: Hello there! How can I assist you today?")
-    elif user_input.lower() == "help":
-        print("🐧 TuxBot: I can help you with basic commands. Try saying 'hello', 'hi', or 'hey' to greet me!")
-    elif user_input.lower() == "who are you":
-        print("🐧 TuxBot: I'm TuxBot, your friendly Linux penguin!")
-    else:
-        print("TuxBot: Hmm... interesting!")
+    # TODO: Use the dictionary + random.choice() here
+    print("TuxBot: Hmm... interesting!")
