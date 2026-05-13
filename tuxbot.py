@@ -7,7 +7,7 @@ import subprocess
 import os
 
 print("🐧 Hello! I'm TuxBot, your friendly Linux penguin.")
-print("Type 'exit' or 'quit' anytime to stop chatting.\n")
+print("Type 'exit' or 'quit' anytime to stop chatting.\\n")
 
 # Memory
 user_name = None
@@ -33,7 +33,7 @@ while True:
         break
 
     # TODO 2: Save name permanently when user says "my name is ..."
-    # Hint: Use with open(..., "w") to write the name
+    # Hint: Use with open(name_file, "w") to write the name
 
     # Personalized greeting
     if user_name and user_input in ["hi", "hello"]:
@@ -60,7 +60,7 @@ while True:
         command = user_input[1:]
         if command == "sysinfo":
             result = subprocess.run(["uname", "-a"], capture_output=True, text=True)
-            reply = f"Here's your system info:\n{result.stdout}"
+            reply = f"Here's your system info:\\n{result.stdout}"
             print(f"🐧 TuxBot: {reply}")
         elif command == "joke":
             jokes = ["Why do Linux users never get lost? Because they always have a 'path' to follow! 😂",
@@ -84,6 +84,3 @@ while True:
 
     # TODO 3: Save both the user message and TuxBot's reply to history_file
     # Hint: Open in "a" (append) mode and write the two lines
-    # with open(history_file, "a") as f:
-    #     f.write(f"You: {user_input}\n")
-    #     f.write(f"TuxBot: {reply}\n")
