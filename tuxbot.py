@@ -1,16 +1,19 @@
 #!/usr/bin/env python3
 # TuxBot - Your Linux penguin buddy
-# Lesson 5: Real Linux Integration
+# Lesson 6: Save & Load Chat History
 
 import random
-import subprocess   # NEW: This lets us run real Linux commands
+import subprocess
+import os   # NEW: helps us work with files
 
 print("🐧 Hello! I'm TuxBot, your friendly Linux penguin.")
-print("Type 'exit' or 'quit' anytime to stop chatting.")
-print("Try slash commands: /sysinfo, /joke, /clear, /help\n")
+print("Type 'exit' or 'quit' anytime to stop chatting.\\n")
 
-# Memory from previous lesson
+# Memory from previous lessons
 user_name = None
+
+# TODO 1: Load previous chat history from "chat_history.txt" here
+# Hint: Check if the file exists, then read and print it
 
 # Responses dictionary
 responses = {
@@ -37,17 +40,13 @@ while True:
         print(f"🐧 TuxBot: Hey {user_name}! How's it going?")
         continue
 
-    # TODO: Add slash command handling here
-    # HINT: Check if user_input starts with "/"
-    # Example:
-    # if user_input.startswith("/"):
-    #     command = user_input[1:]   # remove the slash
-    #     if command == "sysinfo":
-    #         result = subprocess.run(["uname", "-a"], capture_output=True, text=True)
-    #         print(result.stdout)
-
-    # Current placeholder
+    # Get TuxBot's reply
     if user_input in responses:
-        print(f"🐧 TuxBot: {random.choice(responses[user_input])}")
+        reply = random.choice(responses[user_input])
     else:
-        print("🐧 TuxBot: Hmm... interesting!")
+        reply = "Hmm... interesting!"
+
+    print(f"🐧 TuxBot: {reply}")
+
+    # TODO 2: Save both the user's message and TuxBot's reply to "chat_history.txt"
+    # Hint: Open the file in "a" (append) mode and write the lines

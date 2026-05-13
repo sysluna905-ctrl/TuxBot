@@ -1,16 +1,30 @@
 #!/usr/bin/env python3
 # TuxBot - Your Linux penguin buddy
-# Lesson 5: Real Linux Integration
+# Lesson 6: Save & Load Chat History
 
 import random
-import subprocess   # NEW: This lets us run real Linux commands
+import subprocess
+import os
 
 print("🐧 Hello! I'm TuxBot, your friendly Linux penguin.")
-print("Type 'exit' or 'quit' anytime to stop chatting.")
-print("Try slash commands: /sysinfo, /joke, /clear, /help\n")
+print("Type 'exit' or 'quit' anytime to stop chatting.\n")
 
-# Memory from previous lesson
+# === MEMORY FROM PREVIOUS LESSONS ===
 user_name = None
+
+# === LOAD CHAT HISTORY WHEN STARTING ===
+history_file = "chat_history.txt"
+
+# Create the file if it doesn't exist
+if not os.path.exists(history_file):
+    open(history_file, "w").close()   # creates empty file
+
+# Show previous chat history
+print("📜 Loading previous chat history...\n")
+with open(history_file, "r") as f:
+    print(f.read())
+
+print("-" * 40)  # separator
 
 # Responses dictionary
 responses = {
@@ -37,28 +51,15 @@ while True:
         print(f"🐧 TuxBot: Hey {user_name}! How's it going?")
         continue
 
-    if user_input.startswith("/"):
-        command = user_input[1:]  # Remove the slash - bonus trick to make it cleaner
-        if command == "sysinfo":
-            result = subprocess.run(["uname", "-a"], capture_output=True, text=True)
-            print(f"🐧 TuxBot: Here's your system info:\n{result.stdout}")
-        elif command == "joke":
-            jokes = [
-                "Why do Linux users never get lost? Because they always have a 'path' to follow! 😂",
-                "Why did the penguin go to the party? Because it was a Linux bash! 🐧🎉",
-                "Why do programmers prefer dark mode? Because light attracts bugs! 🐞💡"
-            ]
-            print(f"🐧 TuxBot: {random.choice(jokes)}")
-        elif command == "clear":
-            subprocess.run("clear")  # This will clear the terminal
-        else:
-            print("🐧 TuxBot: Oops, I don't know that command. Try /sysinfo, /joke, or /clear!")
-        continue
-
-    
-
-    # Current placeholder
+    # Get TuxBot's reply
     if user_input in responses:
-        print(f"🐧 TuxBot: {random.choice(responses[user_input])}")
+        reply = random.choice(responses[user_input])
     else:
-        print("🐧 TuxBot: Hmm... interesting!")
+        reply = "Hmm... interesting!"
+
+    print(f"🐧 TuxBot: {reply}")
+
+    # === SAVE TO FILE (append mode) ===
+    with open(history_file, "a") as f:
+        f.write(f"You: {user_input}\n")
+        f.write(f"TuxBot: {reply}\n\n")
