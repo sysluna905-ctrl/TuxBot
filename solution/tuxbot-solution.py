@@ -45,11 +45,9 @@ while True:
     if user_input.startswith("my name is "):
         user_name = user_input.replace("my name is ", "").strip().title()
         print(f"🐧 TuxBot: Nice to meet you, {user_name}! I'm TuxBot! 🐧")
-        continue
 
     if user_name and user_input in ["hi", "hello"]:
         print(f"🐧 TuxBot: Hey {user_name}! How's it going?")
-        continue
 
     # Get TuxBot's reply
     if user_input in responses:
